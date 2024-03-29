@@ -1,0 +1,13 @@
+
+<div class="flex md:flex-row sm:flex-col md:justify-between items-center w-full bg-white">
+  <div class=" flex flex-row justify-between items-center bg-white border-[1px] border-dark-purple rounded-xl px-2">
+
+    <input
+    (input)="onSearch($event)" [(ngModel)]="searchValue" type="text" name="search" id="search" placeholder="Search users by id" class="!p-1.5 text-dark-purple placeholder:!text-blue-black  bg-white hover:!outline-none focus:!outline-none" />
+    <i class="bi bi-search text-dark-purple text-[19px]"></i>
+  </div>
+
+  <button (click)="clearSearch()" class="text-dark-purple bg-white font-semibold border-[1px] border-dark-purple px-4 md:mt-0 sm:mt-3 hover:text-light-purple py-1.5 rounded-xl">clear</button>
+
+
+</div>

@@ -1,0 +1,78 @@
+<div
+  class="w-full md:px-10 sm:px-3 py-[30px] flex flex-col justify-start items-center text-dark-purple bg-white min-h-screen"
+>
+  @if (filteredUsers) {
+
+  <div class="w-full mb-5 bg-white">
+    <app-search></app-search>
+  </div>
+  <div class="w-full overflow-auto min-h-max">
+    <table class="w-full mb-10">
+      <thead class="border-b-[1px] w-full">
+        <th
+          class="pb-2 whitespace-nowrap pr-6 text-start text-dark-purple text-[14px] uppercase"
+        >
+          avatar
+        </th>
+        <th
+          class="pb-2 whitespace-nowrap pr-6 text-start text-dark-purple text-[14px] uppercase"
+        >
+          Name
+        </th>
+        <th
+          class="pb-2 whitespace-nowrap pr-6 text-start text-dark-purple text-[14px] uppercase"
+        >
+          user id
+        </th>
+        <th
+          class="pb-2 whitespace-nowrap pr-6 text-start text-dark-purple text-[14px] uppercase"
+        >
+          Email
+        </th>
+        <th class="pb-2 text-start text-dark-purple text-[14px] pl-3"></th>
+      </thead>
+      <tbody class="w-full">
+        @for (user of filteredUsers; track user.id) {
+        <tr class="border-b-[1px] w-full">
+          <td class="whitespace-nowrap min-w-max min-h-max py-3 pr-6">
+            <img
+              class="inline-block w-[50px] h-[50px] object-cover mr-3 rounded-full"
+              [src]="user?.avatar"
+              alt="user avatar"
+            />
+          </td>
+          <td class="table-cell whitespace-nowrap pr-6 text-[14px]">
+            {{ user?.first_name }} {{ user?.last_name }}
+          </td>
+
+          <td class="whitespace-nowrap pr-6 text-[14px]">
+            {{ user.id }}
+          </td>
+
+          <td class="whitespace-nowrap pr-6 text-[14px]">
+            <span>{{ user.email }}</span>
+          </td>
+
+          <td class="whitespace-nowrap pr-3">
+            <span
+              [routerLink]="'/users/' + user.id"
+              class="cursor-pointer whitespace-nowrap"
+            >
+              VIEW USER
+              <i class="cursor-pointer text-xs ml-1 bi bi-arrow-right"></i>
+            </span>
+          </td>
+        </tr>
+
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <app-pagination></app-pagination>
+  } @else {
+  <div class="self-center mt-[100px]">
+    <app-spinner></app-spinner>
+  </div>
+  }
+</div>
