@@ -15,6 +15,7 @@ export class PaginationComponent {
   }
 
   getPage(page) {
+    console.log(page)
     this.page = page;
     this.router.navigate(['/users'], { queryParams: { page:  this.page } });
 
