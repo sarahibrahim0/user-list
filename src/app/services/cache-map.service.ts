@@ -28,15 +28,15 @@ console.log(req + 'get ')
       // if(!req){
       //   return null
       // }
-      console.log(req)
+      // console.log(req)
         const entry: CacheEntry = { url: req.urlWithParams, response: res, entryTime: Date.now() };
 
-        console.log(entry + 'entry')
+        // console.log(entry + 'entry')
         console.log(req.urlWithParams + 'req.urlWithParams ')
 
         this.cacheMap.set(req.urlWithParams, entry);
       this.deleteExpiredCache();
-      console.log(this.cacheMap + 'cacheMap')
+      // console.log(this.cacheMap + 'cacheMap')
 
   }
   private deleteExpiredCache() {
