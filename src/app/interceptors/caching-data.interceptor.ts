@@ -18,9 +18,11 @@ export class CachingDataInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     if (!this.isRequestCachable(req)) {
       return next.handle(req);
+
     }
     const cachedResponse = this.cache.get(req);
     if (cachedResponse !== null) {
+      console.log(cachedResponse)
       return of(cachedResponse);
     }
     return next.handle(req).pipe(
