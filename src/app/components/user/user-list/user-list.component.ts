@@ -17,7 +17,7 @@ export class UserListComponent {
     private route : ActivatedRoute
   ) {}
   filteredUsers: User[] = []
-  page : number
+
 
   ngOnInit() {
 
@@ -35,6 +35,12 @@ export class UserListComponent {
     this.userService.getUsers(page).subscribe(
       {
         next:(data)=>{
+
+          this.userService.pageNum.next(data.page)
+          this.userService.perPage.next(data.per_page);
+          this.userService.total.next(data.total);
+          this.userService.totalPages.next(data.total_pages);
+
           this.searchService.searchObservable$.subscribe(
             {
               next: (id)=>{

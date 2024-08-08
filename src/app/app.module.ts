@@ -13,6 +13,9 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CachingDataInterceptor } from './interceptors/caching-data.interceptor';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { progressInterceptorInterceptor } from './interceptors/progress-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,13 +26,17 @@ import { CachingDataInterceptor } from './interceptors/caching-data.interceptor'
     BreadCrampComponent,
     SearchComponent,
     PaginationComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ProgressBarComponent
   ],
   imports: [
   BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    MatProgressBarModule
+
+
   ],
   providers: [
     provideAnimationsAsync(),
@@ -39,6 +46,11 @@ import { CachingDataInterceptor } from './interceptors/caching-data.interceptor'
       useClass : CachingDataInterceptor,
       multi: true,
   },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass : progressInterceptorInterceptor,
+    multi: true,
+},
 
   ],
   bootstrap: [AppComponent]

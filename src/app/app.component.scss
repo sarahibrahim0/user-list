@@ -1,0 +1,3 @@
+:host ::ng-deep .mat-progress-bar .mat-progress-bar-fill {
+  transition: transform 5s linear!important /* Slows down the animation */
+}

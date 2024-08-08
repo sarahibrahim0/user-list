@@ -38,3 +38,9 @@ ul{
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+:host ::ng-deep .mat-progress-bar .mat-progress-bar-fill {
+  transition: transform 10s linear!important; /* Slows down the animation */
+}

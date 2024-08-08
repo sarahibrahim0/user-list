@@ -23,7 +23,10 @@ export class UserDetailsComponent {
      {
       if(params['id']){
         this.urlService.changeParams(params['id']);
-        this.userService.getUserById(params['id']).subscribe(data=>this.user =data.data)
+        setTimeout(()=>{
+          this.userService.getUserById(params['id']).subscribe(data=>this.user =data.data)
+
+        }, 1000)
       }
     }
     )

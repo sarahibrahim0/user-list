@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { UserService } from './../../services/user.service';
 import { SearchService } from '../../services/search.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -11,7 +12,7 @@ export class SearchComponent {
 
 
 
-  constructor(private searchService: SearchService){
+  constructor(private searchService: SearchService  ){
 
   }
 searchValue

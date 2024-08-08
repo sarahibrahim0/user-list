@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 
 @Injectable({
@@ -9,7 +9,12 @@ import { User } from '../interfaces/user';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  getUsers(page: number): Observable<any> {
+  pageNum : BehaviorSubject<number> = new BehaviorSubject(0);
+  perPage: BehaviorSubject<number> = new BehaviorSubject(0);
+  total: BehaviorSubject<number> = new BehaviorSubject(0)
+  totalPages: BehaviorSubject<number> = new BehaviorSubject(0)
+
+  getUsers(page?: number): Observable<any> {
     return this.http.get<any>(`https://reqres.in/api/users?page=${page}`);
   }
 

@@ -1,9 +1,8 @@
+
 <div
   class="w-full md:px-10 sm:px-3 py-[30px] flex flex-col justify-start items-center text-dark-purple bg-white min-h-screen"
 >
-  @if (filteredUsers) {
-
-  <div class="w-full mb-5 bg-white">
+ <div class="w-full mb-5 bg-white">
     <app-search></app-search>
   </div>
   <div class="w-full overflow-auto min-h-max">
@@ -68,11 +67,19 @@
       </tbody>
     </table>
   </div>
-
-  <app-pagination></app-pagination>
-  } @else {
+  @if(filteredUsers.length > 1)
+{  <app-pagination  ></app-pagination>
+}
+@if(filteredUsers.length === 0)
+{
   <div class="self-center mt-[100px]">
-    <app-spinner></app-spinner>
-  </div>
-  }
+     <p>
+      No User Found
+     </p>
 </div>
+}
+
+
+</div>
+
+
