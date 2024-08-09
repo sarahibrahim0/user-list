@@ -25,7 +25,6 @@ export class UserListComponent {
 
   ngOnInit() {
 
-
     this.store.dispatch(
       loadUsers({ page: this.page, postsPerPage: this.perPAge })
     );
@@ -36,9 +35,6 @@ export class UserListComponent {
     {
       this.searchService.searchObservable$.subscribe({
         next: (id) => {
-          console.log(id);
-          console.log(this.users + 'users');
-
           this.filteredUsers = id? users.filter((user) => user.id.toString() === id):users;
         },
       });

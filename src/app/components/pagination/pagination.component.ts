@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { UserService } from './../../services/user.service';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { UserState } from './../../store/user.reducer';
 import { loadUsers, setCurrentPage } from '../../store/user.actions';
 import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-pagination',
@@ -11,11 +12,15 @@ import { Router } from '@angular/router';
   styleUrl: './pagination.component.scss',
 })
 export class PaginationComponent {
+  private unsubscribe$ = new Subject<void>();
+
   constructor(
     private UserService: UserService,
     private store: Store<{ userStat: UserState }>,
     private router : Router
-  ) {}
+  ) {
+ 
+  }
 
   page: number;
   perPage: number;
@@ -41,11 +46,19 @@ export class PaginationComponent {
 
   getPage(pageNum: number) {
     this.store.dispatch(
+      setCurrentPage({
+        currentPage: pageNum ,
+      })
+    );
+    this.store.dispatch(
       loadUsers({ page: pageNum, postsPerPage: this.perPage })
     );
+    this.router.navigate(['/users'], { queryParams: { page: this.page } });
+
   }
 
   onButtonClick(number: number) {
+
     if (number === -1 && this.page !== 1) {
       this.page -= 1;
       this.store.dispatch(
@@ -68,10 +81,10 @@ export class PaginationComponent {
       this.store.dispatch(
 
         loadUsers({ page: this.page, postsPerPage: this.perPage })
-      );
 
+      );
     }
-    this.router.navigate(['/'], { queryParams: { page: this.page } });
+    this.router.navigate(['/users'], { queryParams: { page: this.page } });
 
   }
 }

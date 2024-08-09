@@ -10,7 +10,7 @@ import { UserState } from '../store/user.reducer';
 })
 export class UserService {
 
-  pageNum: BehaviorSubject<number> = new BehaviorSubject(0);
+  pageNum: BehaviorSubject<number> = new BehaviorSubject(1);
   perPage: BehaviorSubject<number> = new BehaviorSubject(0);
   total: BehaviorSubject<number> = new BehaviorSubject(0);
   totalPages: BehaviorSubject<number> = new BehaviorSubject(0);
@@ -49,7 +49,7 @@ export class UserService {
 
 
 
-  getUsers(page: number = 1): Observable<any> {
+  getUsers(page: number ): Observable<any> {
     return this.http.get<any>(`https://reqres.in/api/users?page=${page}`);
   }
 
