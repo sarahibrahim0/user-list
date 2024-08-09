@@ -13,9 +13,9 @@ import { loadUsers, setCurrentPage } from '../../../store/user.actions';
   styleUrl: './user-list.component.scss',
 })
 export class UserListComponent {
-  users: User[];
+  users: User[] = []
   page: number;
-  perPAge: number;
+  perPage: number;
   constructor(
     private searchService: SearchService,
     private UserService: UserService,
@@ -26,11 +26,16 @@ export class UserListComponent {
 
   ngOnInit() {
 
-    this.UserService.perPage.subscribe(perPage => this.perPAge = perPage);
+    this.UserService.perPage.subscribe(perPage => this.perPage = perPage);
     this.UserService.pageNum.subscribe(page=> this.page = page);
+    console.log(this.page + 'page')
+    console.log(this.perPage)
+    console.log(this.users)
+
+
 
       this.store.dispatch(
-        loadUsers({ page: this.page, postsPerPage: this.perPAge })
+        loadUsers({ page: this.page, postsPerPage: this.perPage })
       );
 
 
