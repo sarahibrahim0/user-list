@@ -42,7 +42,6 @@ export class UserService {
   });
 
   this.store.select(store=>store.userState.users).subscribe(users=>{
-    console.log(users)
 
     this.users.next(users);
   });
@@ -50,7 +49,7 @@ export class UserService {
 
 
 
-  getUsers(page?: number): Observable<any> {
+  getUsers(page: number = 1): Observable<any> {
     return this.http.get<any>(`https://reqres.in/api/users?page=${page}`);
   }
 

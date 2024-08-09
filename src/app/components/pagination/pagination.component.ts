@@ -3,6 +3,7 @@ import { UserService } from './../../services/user.service';
 import { Store } from '@ngrx/store';
 import { UserState } from './../../store/user.reducer';
 import { loadUsers, setCurrentPage } from '../../store/user.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pagination',
@@ -12,7 +13,8 @@ import { loadUsers, setCurrentPage } from '../../store/user.actions';
 export class PaginationComponent {
   constructor(
     private UserService: UserService,
-    private store: Store<{ userStat: UserState }>
+    private store: Store<{ userStat: UserState }>,
+    private router : Router
   ) {}
 
   page: number;
@@ -45,9 +47,10 @@ export class PaginationComponent {
 
   onButtonClick(number: number) {
     if (number === -1 && this.page !== 1) {
+      this.page -= 1;
       this.store.dispatch(
         setCurrentPage({
-          currentPage: this.page - 1,
+          currentPage: this.page ,
         })
       );
 
@@ -55,15 +58,20 @@ export class PaginationComponent {
         loadUsers({ page: this.page , postsPerPage: this.perPage })
       );
     } else if (number === 1 && this.page < this.totalPages) {
+      this.page += 1;
       this.store.dispatch(
         setCurrentPage({
-          currentPage: this.page + 1,
+          currentPage: this.page ,
         })
       );
 
       this.store.dispatch(
+
         loadUsers({ page: this.page, postsPerPage: this.perPage })
       );
+
     }
+    this.router.navigate(['/'], { queryParams: { page: this.page } });
+
   }
 }
