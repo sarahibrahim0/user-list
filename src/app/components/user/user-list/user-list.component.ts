@@ -25,12 +25,14 @@ export class UserListComponent {
 
   ngOnInit() {
 
+
+    this.UserService.pageNum.subscribe(page => this.page = page);
+    this.UserService.perPage.subscribe(perPage => this.perPAge = perPage);
+
     this.store.dispatch(
       loadUsers({ page: this.page, postsPerPage: this.perPAge })
     );
 
-    this.UserService.pageNum.subscribe(page => this.page = page);
-    this.UserService.perPage.subscribe(perPage => this.perPAge = perPage);
     this.UserService.users.subscribe(users =>
     {
       this.searchService.searchObservable$.subscribe({

@@ -19,7 +19,7 @@ export class PaginationComponent {
     private store: Store<{ userStat: UserState }>,
     private router : Router
   ) {
- 
+
   }
 
   page: number;
@@ -53,7 +53,6 @@ export class PaginationComponent {
     this.store.dispatch(
       loadUsers({ page: pageNum, postsPerPage: this.perPage })
     );
-    this.router.navigate(['/users'], { queryParams: { page: this.page } });
 
   }
 
@@ -79,12 +78,9 @@ export class PaginationComponent {
       );
 
       this.store.dispatch(
-
         loadUsers({ page: this.page, postsPerPage: this.perPage })
-
       );
     }
-    this.router.navigate(['/users'], { queryParams: { page: this.page } });
 
   }
 }
