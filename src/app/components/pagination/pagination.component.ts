@@ -65,9 +65,5 @@ ngOnInit(){
 
     this.store.dispatch(loadUsers({page: this.page , postsPerPage:  6}))
 
-
-
-
-
   }
 }
