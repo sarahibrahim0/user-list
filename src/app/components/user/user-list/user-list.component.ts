@@ -6,7 +6,7 @@ import { SearchService } from '../../../services/search.service';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { UserState } from '../../../store/user.reducer';
-import { loadUsers } from '../../../store/user.actions';
+import { loadUsers, setCurrentPage } from '../../../store/user.actions';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -19,19 +19,23 @@ export class UserListComponent {
   constructor(
     private searchService: SearchService,
     private UserService: UserService,
-    private store: Store<{ userState: UserState }>
+    private store: Store<{ userState: UserState }>,
+    private activatedRoute : ActivatedRoute
   ) {}
   filteredUsers: User[] = [];
 
   ngOnInit() {
 
-
-    this.UserService.pageNum.subscribe(page => this.page = page);
     this.UserService.perPage.subscribe(perPage => this.perPAge = perPage);
+    this.UserService.pageNum.subscribe(page=> this.page = page);
 
-    this.store.dispatch(
-      loadUsers({ page: this.page, postsPerPage: this.perPAge })
-    );
+
+
+     this.store.dispatch(setCurrentPage({ currentPage: this.page }));
+      this.store.dispatch(
+        loadUsers({ page: this.page, postsPerPage: this.perPAge })
+      );
+    
 
     this.UserService.users.subscribe(users =>
     {
