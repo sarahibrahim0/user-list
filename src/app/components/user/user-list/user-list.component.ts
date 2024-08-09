@@ -13,39 +13,39 @@ import { loadUsers } from '../../../store/user.actions';
   styleUrl: './user-list.component.scss',
 })
 export class UserListComponent {
-  // constructor(
-  //   private userService: UserService,
-  //   private route : ActivatedRoute
-  // ) {}
-
-  users$: Observable<User[]>;
-  page$ : Observable<number>
-  page: number
+  users: User[];
+  page: number;
+  perPAge: number;
   constructor(
     private searchService: SearchService,
+    private UserService: UserService,
     private store: Store<{ userState: UserState }>
-  ) {
-    this.users$ = store.select((state) => state.userState.users);
-   this.page$ = store.select((state)=> state.userState.currentPage)
-
-  }
+  ) {}
   filteredUsers: User[] = [];
 
   ngOnInit() {
-    this.page$.subscribe(page=>{
-      this.page = page
-    })
-    this.store.dispatch(loadUsers({page: this.page , postsPerPage: 6}));
-    this.users$.subscribe((users) => {
+
+
+    this.store.dispatch(
+      loadUsers({ page: this.page, postsPerPage: this.perPAge })
+    );
+
+    this.UserService.pageNum.subscribe(page => this.page = page);
+    this.UserService.perPage.subscribe(perPage => this.perPAge = perPage);
+    this.UserService.users.subscribe(users =>
+    {
       this.searchService.searchObservable$.subscribe({
         next: (id) => {
-          this.filteredUsers = id
-            ? users.filter((user) => user.id.toString() === id)
-            : users;
+          console.log(id);
+          console.log(this.users + 'users');
+
+          this.filteredUsers = id? users.filter((user) => user.id.toString() === id):users;
         },
       });
-    });
+    }
+    );
+
+
+
   }
-
-
 }

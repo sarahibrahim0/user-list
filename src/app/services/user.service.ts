@@ -14,6 +14,8 @@ export class UserService {
   perPage: BehaviorSubject<number> = new BehaviorSubject(0);
   total: BehaviorSubject<number> = new BehaviorSubject(0);
   totalPages: BehaviorSubject<number> = new BehaviorSubject(0);
+  users: BehaviorSubject<User[]> = new BehaviorSubject([]);
+
 
   constructor(private http: HttpClient , private store : Store<{userState: UserState}>) {
   this.store.select(store=>store.userState.currentPage).subscribe(page=>{
@@ -36,10 +38,14 @@ export class UserService {
   this.store.select(store=>store.userState.totalPosts).subscribe(posts=>{
     console.log(posts)
 
-    this.perPage.next(posts);
+    this.total.next(posts);
   });
 
+  this.store.select(store=>store.userState.users).subscribe(users=>{
+    console.log(users)
 
+    this.users.next(users);
+  });
   }
 
 

@@ -50,7 +50,6 @@ export class PaginationComponent {
           currentPage: this.page - 1,
         })
       );
-      console.log(this.page);
 
       this.store.dispatch(
         loadUsers({ page: this.page , postsPerPage: this.perPage })
@@ -62,7 +61,6 @@ export class PaginationComponent {
         })
       );
 
-      console.log(this.page);
       this.store.dispatch(
         loadUsers({ page: this.page, postsPerPage: this.perPage })
       );
