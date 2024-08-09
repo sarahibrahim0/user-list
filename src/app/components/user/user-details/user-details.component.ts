@@ -35,7 +35,7 @@ export class UserDetailsComponent {
         setTimeout(()=>{
         this.store.dispatch(loadUser({userId :params['id']}));
 
-        }, 500)
+        }, 1000)
       }
     }
     )
