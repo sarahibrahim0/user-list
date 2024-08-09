@@ -31,10 +31,8 @@ export class UserDetailsComponent {
     this.activatedRoute.params.subscribe((params)=>
      {
       if(params['id']){
-        setTimeout(()=>{
         this.store.dispatch(loadUser({userId :params['id']}));
 
-        }, 1000)
       }
     }
     )
