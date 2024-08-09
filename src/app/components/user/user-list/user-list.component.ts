@@ -28,10 +28,6 @@ export class UserListComponent {
 
     this.UserService.perPage.subscribe(perPage => this.perPage = perPage);
     this.UserService.pageNum.subscribe(page=> this.page = page);
-    console.log(this.page + 'page')
-    console.log(this.perPage)
-    console.log(this.users)
-
 
 
       this.store.dispatch(
