@@ -2,34 +2,48 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UrlDataService } from '../../../services/url-data.service';
 import { UserService } from '../../../services/user.service';
-import { filter } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { User } from './../../../interfaces/user';
+import { Store } from '@ngrx/store';
+import { UserState } from './../../../store/user.reducer';
+import { loadUser } from '../../../store/user.actions';
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.scss'
 })
 export class UserDetailsComponent {
+  user$: Observable<User>
 
-  constructor(private activatedRoute: ActivatedRoute , private urlService: UrlDataService , private userService: UserService){
+  constructor(private activatedRoute: ActivatedRoute , private urlService: UrlDataService , private userService: UserService,
+    private store : Store<{ userState: UserState }>
+  ){
+
+    this.user$ = store.select(state => state.userState.user);
 
   }
 
-  user: User
+
 
   ngOnInit(){
+
 
     this.activatedRoute.params.subscribe((params)=>
      {
       if(params['id']){
-        this.urlService.changeParams(params['id']);
-        setTimeout(()=>{
-          this.userService.getUserById(params['id']).subscribe(data=>this.user =data.data)
+        this.store.dispatch(loadUser({userId :params['id']}));
+        // setTimeout(()=>{
+        //   this.userService.getUserById(params['id']).subscribe(data=>this.user$ =data.data)
 
-        }, 1000)
+        // }, 1000)
       }
     }
     )
+
+    this.user$.subscribe(user=>{
+      console.log(user)
+    })
+
   }
 
 }

@@ -16,6 +16,10 @@ import { CachingDataInterceptor } from './interceptors/caching-data.interceptor'
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { progressInterceptorInterceptor } from './interceptors/progress-interceptor.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { userReducer, UserState } from './store/user.reducer';
+import { UserEffects } from './store/user.effects';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,9 @@ import { progressInterceptorInterceptor } from './interceptors/progress-intercep
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    StoreModule.forRoot({ userState: userReducer }),
+    EffectsModule.forRoot([UserEffects])
 
 
   ],

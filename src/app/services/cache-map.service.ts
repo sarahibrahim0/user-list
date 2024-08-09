@@ -19,7 +19,6 @@ console.log(req + 'get ')
     if (!entry) {
         return null;
     }
-    console.log(entry + 'get ')
 
     const isExpired = (Date.now() - entry.entryTime) > MAX_CACHE_AGE;
     return isExpired ? null : entry.response;

@@ -1,6 +1,6 @@
 <div class="flex flex-row items-start justify-center text-center">
-  @if(user){
-  <div class="w-full block bg-white dark:bg-neutral-700 dark:shadow-black/30">
+  <ng-container *ngIf="user$ | async as user; else loading">
+    <div class="w-full block bg-white dark:bg-neutral-700 dark:shadow-black/30">
     <div class="h-28 overflow-hidden bg-[#6d5b98]"></div>
     <div
       class="mx-auto -mt-12 w-24 overflow-hidden rounded-full border-2 border-white bg-white dark:border-neutral-800 dark:bg-neutral-800"
@@ -32,10 +32,11 @@
       </p>
     </div>
   </div>
-
-  } @else {
-  <div class="self-center mt-[100px]">
+</ng-container>
+<ng-template #loading>
+  <div class="self-center mt-[100px]" >
     <app-spinner></app-spinner>
   </div>
-  }
+</ng-template>
+
 </div>

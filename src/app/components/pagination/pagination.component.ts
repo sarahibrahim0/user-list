@@ -2,6 +2,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../interfaces/user';
 import { UserService } from './../../services/user.service';
+import { Store } from '@ngrx/store';
+import { UserState } from './../../store/user.reducer';
+import { loadUsers, setCurrentPage } from '../../store/user.actions';
 
 @Component({
   selector: 'app-pagination',
@@ -9,7 +12,9 @@ import { UserService } from './../../services/user.service';
   styleUrl: './pagination.component.scss',
 })
 export class PaginationComponent {
-  constructor(private router: Router , private UserService : UserService){}
+  constructor(private router: Router , private UserService : UserService
+    ,private store: Store<{userStat : UserState}>
+  ){}
 
 
 
@@ -42,19 +47,27 @@ ngOnInit(){
 }
 
   getPage(pageNum : number) {
-    this.UserService.pageNum.next(pageNum);
-    this.router.navigate(['/users'], { queryParams: { page:  this.page } });
+    this.store.dispatch(setCurrentPage({ currentPage: pageNum }));
+    this.store.dispatch(loadUsers({page: this.page , postsPerPage:  6}))
   }
 
   onButtonClick(number: number) {
     if (number === -1 && this.page !== 1) {
       this.page = this.page + number;
+      this.store.dispatch(setCurrentPage({ currentPage: this.page }));
+
 
     } else if (number === 1 && this.page < this.totalPages) {
       this.page = this.page + number;
+      this.store.dispatch(setCurrentPage({ currentPage: this.page }));
+
     }
 
-    this.router.navigate(['/users'], { queryParams: { page:  this.page } });
+    this.store.dispatch(loadUsers({page: this.page , postsPerPage:  6}))
+
+
+
+
 
   }
 }
