@@ -14,7 +14,6 @@ export class CacheMapService implements Cache {
 //  {
 //   return null;
 //     }
-console.log(req + 'get ')
     const entry = this.cacheMap.get(req.urlWithParams);
     if (!entry) {
         return null;
@@ -31,7 +30,6 @@ console.log(req + 'get ')
         const entry: CacheEntry = { url: req.urlWithParams, response: res, entryTime: Date.now() };
 
         // console.log(entry + 'entry')
-        console.log(req.urlWithParams + 'req.urlWithParams ')
 
         this.cacheMap.set(req.urlWithParams, entry);
       this.deleteExpiredCache();

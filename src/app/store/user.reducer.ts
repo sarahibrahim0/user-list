@@ -16,7 +16,7 @@ export interface UserState {
 export const initialState: UserState = {
   users: [],
   user: null,
-  currentPage: 0,
+  currentPage: 1,
   totalPages: 0,
   totalPosts: 0,
   postsPerPage: 6,
@@ -25,7 +25,7 @@ export const initialState: UserState = {
 
 export const userReducer = createReducer(
   initialState,
-  on(loadUsers, (state, { page}) => ({ ...state })),
+  on(loadUsers, (state, { page}) => ({ ...state , currentPage : page})),
   on(loadUsersSuccess, (state, { users, currentPage, postsPerPage, totalPages, totalPosts }) => ({
     ...state,
     users,

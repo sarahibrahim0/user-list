@@ -19,24 +19,20 @@ export class UserService {
 
   constructor(private http: HttpClient , private store : Store<{userState: UserState}>) {
   this.store.select(store=>store.userState.currentPage).subscribe(page=>{
-    console.log(page)
     this.pageNum.next(page);
   });
 
   this.store.select(store=>store.userState.postsPerPage).subscribe(perPage=>{
-    console.log(perPage)
 
     this.perPage.next(perPage);
   });
 
   this.store.select(store=>store.userState.totalPages).subscribe(pages=>{
-    console.log(pages)
 
     this.totalPages.next(pages);
   });
 
   this.store.select(store=>store.userState.totalPosts).subscribe(posts=>{
-    console.log(posts)
 
     this.total.next(posts);
   });
@@ -54,7 +50,6 @@ export class UserService {
   }
 
   getUserById(id: string): Observable<any> {
-    console.log(id);
     return this.http.get<any>(`https://reqres.in/api/users/${id}`);
   }
 }
