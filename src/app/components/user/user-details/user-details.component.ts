@@ -32,10 +32,10 @@ export class UserDetailsComponent {
      {
       if(params['id']){
         this.store.dispatch(loadUser({userId :params['id']}));
-        // setTimeout(()=>{
-        //   this.userService.getUserById(params['id']).subscribe(data=>this.user$ =data.data)
+        setTimeout(()=>{
+        this.store.dispatch(loadUser({userId :params['id']}));
 
-        // }, 1000)
+        }, 500)
       }
     }
     )
