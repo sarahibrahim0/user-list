@@ -29,13 +29,10 @@ export class UserListComponent {
     this.UserService.perPage.subscribe(perPage => this.perPAge = perPage);
     this.UserService.pageNum.subscribe(page=> this.page = page);
 
-
-
-     this.store.dispatch(setCurrentPage({ currentPage: this.page }));
       this.store.dispatch(
         loadUsers({ page: this.page, postsPerPage: this.perPAge })
       );
-    
+
 
     this.UserService.users.subscribe(users =>
     {
