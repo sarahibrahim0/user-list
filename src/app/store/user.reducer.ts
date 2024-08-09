@@ -16,7 +16,7 @@ export interface UserState {
 export const initialState: UserState = {
   users: [],
   user: null,
-  currentPage: 1,
+  currentPage: 0,
   totalPages: 0,
   totalPosts: 0,
   postsPerPage: 6,
