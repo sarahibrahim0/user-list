@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { UserService } from '../services/user.service';
-import { loadUsers, loadUsersSuccess, loadUsersFailure, loadUser, loadSingleUserSuccess, loadSingleUserFailure } from './user.actions';
+import { loadUsers, loadUsersSuccess, loadUsersFailure, loadUser, loadSingleUserSuccess, loadSingleUserFailure, setCurrentPage, setCurrentPageSuccess } from './user.actions';
 
 @Injectable()
 export class UserEffects {
@@ -40,5 +40,16 @@ export class UserEffects {
   );
 
 
+
+  setCurrentPage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(setCurrentPage),
+      mergeMap(action =>
+        // Perform any side effects here, such as API calls
+        // For simplicity, we're just mapping to a success action
+        of(setCurrentPageSuccess({ currentPage: action.currentPage }))
+      )
+    )
+  );
 
 }

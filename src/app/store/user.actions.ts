@@ -13,6 +13,12 @@ export const loadSingleUserSuccess = createAction('[User] Load User Success', pr
 export const loadSingleUserFailure = createAction('[User] Load User Failure', props<{ error: string }>());
 
 
+export const setCurrentPage = createAction(
+  '[User] Set Current Page',
+  props<{ currentPage: number }>()
+);
 
-export const setCurrentPage = createAction('[User] Set Current Page', props<{ currentPage: number }>());
-
+export const setCurrentPageSuccess = createAction(
+  '[User] Set Current Page Success',
+  props<{ currentPage: number }>()
+);
