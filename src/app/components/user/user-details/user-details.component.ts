@@ -37,9 +37,7 @@ export class UserDetailsComponent {
     }
     )
 
-    this.user$.subscribe(user=>{
-      console.log(user)
-    })
+
 
   }
 
