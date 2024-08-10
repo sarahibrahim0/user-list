@@ -4,17 +4,13 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
 import { UserDetailsComponent } from './components/user/user-details/user-details.component';
 
 const routes: Routes = [
-
-  { path: '', component: UserListComponent},
-  ,
-{    path: 'users/:id', component: UserDetailsComponent
-},
-
-
+  { path: '', redirectTo: '/users', pathMatch: 'full' },
+  { path: 'users', component: UserListComponent },
+    { path: 'users/:id', component: UserDetailsComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

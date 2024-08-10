@@ -5,10 +5,13 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { UserService } from '../services/user.service';
 import { loadUsers, loadUsersSuccess, loadUsersFailure, loadUser, loadSingleUserSuccess, loadSingleUserFailure, setCurrentPage, setCurrentPageSuccess } from './user.actions';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class UserEffects {
-  constructor(private actions$: Actions, private userService: UserService) {}
+  constructor(private actions$: Actions, private userService: UserService,
+    private activatedRoute : ActivatedRoute
+  ) {}
 
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
@@ -42,11 +45,10 @@ export class UserEffects {
 
 
   setCurrentPage$ = createEffect(() =>
+
     this.actions$.pipe(
       ofType(setCurrentPage),
       mergeMap(action =>
-        // Perform any side effects here, such as API calls
-        // For simplicity, we're just mapping to a success action
         of(setCurrentPageSuccess({ currentPage: action.currentPage }))
       )
     )

@@ -17,10 +17,8 @@ export class PaginationComponent {
   constructor(
     private UserService: UserService,
     private store: Store<{ userStat: UserState }>,
-    private router : Router
-  ) {
-
-  }
+    private router: Router
+  ) {}
 
   page: number;
   perPage: number;
@@ -47,40 +45,42 @@ export class PaginationComponent {
   getPage(pageNum: number) {
     this.store.dispatch(
       setCurrentPage({
-        currentPage: pageNum ,
+        currentPage: pageNum,
       })
     );
     this.store.dispatch(
       loadUsers({ page: pageNum, postsPerPage: this.perPage })
     );
 
+    // this.router.navigate(['/users'], { queryParams: { page: this.page } });
   }
 
   onButtonClick(number: number) {
-
     if (number === -1 && this.page !== 1) {
       this.page -= 1;
       this.store.dispatch(
         setCurrentPage({
-          currentPage: this.page ,
-        })
-      );
-
-      this.store.dispatch(
-        loadUsers({ page: this.page , postsPerPage: this.perPage })
-      );
-    } else if (number === 1 && this.page < this.totalPages) {
-      this.page += 1;
-      this.store.dispatch(
-        setCurrentPage({
-          currentPage: this.page ,
+          currentPage: this.page,
         })
       );
 
       this.store.dispatch(
         loadUsers({ page: this.page, postsPerPage: this.perPage })
       );
-    }
 
+      // this.router.navigate(['/users'], { queryParams: { page: this.page } });
+    } else if (number === 1 && this.page < this.totalPages) {
+      this.page += 1;
+      this.store.dispatch(
+        setCurrentPage({
+          currentPage: this.page,
+        })
+      );
+
+      this.store.dispatch(
+        loadUsers({ page: this.page, postsPerPage: this.perPage })
+      );
+      // this.router.navigate(['/users'], { queryParams: { page: this.page } });
+    }
   }
 }

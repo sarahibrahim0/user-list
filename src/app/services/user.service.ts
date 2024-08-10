@@ -10,7 +10,7 @@ import { UserState } from '../store/user.reducer';
 })
 export class UserService {
 
-  pageNum: BehaviorSubject<number> = new BehaviorSubject(1);
+  pageNum: BehaviorSubject<number> = new BehaviorSubject(0);
   perPage: BehaviorSubject<number> = new BehaviorSubject(0);
   total: BehaviorSubject<number> = new BehaviorSubject(0);
   totalPages: BehaviorSubject<number> = new BehaviorSubject(0);
